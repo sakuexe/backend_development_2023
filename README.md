@@ -16,3 +16,9 @@ HAMK Riihimäki's "Backend Web Development" -course
 
 Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
 sint cillum sint consectetur cupidatat.
+
+## Links
+
+- [Microsoft Azure Portal](https://portal.azure.com/)
+- [WinSCP](https://winscp.net/eng/index.php)
+- [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)
