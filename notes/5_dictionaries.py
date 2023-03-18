@@ -39,6 +39,9 @@ print("Jonathan" in users) # False
 # Clear a dictionary or remove an element
 # users.clear()
 del users["John"]
+# You can also use the del keyword for deleting variables!
+unused_var = "Just something"
+del unused_var
 
 # iterate through dictionaries with this useful trick
 animals: dict = {"cat": "kissa", "dog": "koira", "monkey": "apina"}
