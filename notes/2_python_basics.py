@@ -33,11 +33,11 @@ descriptive_variable = True
 
 # How to download a files online with python
 from urllib.request import urlopen
-html = urlopen("https://docs.python.org/3/library/index.html")
-read_html = html.read()
-decoded_html = read_html.decode("utf-8")
-# print the first 1000 characters
-# print(decoded_html[:1000])
+with urlopen("https://docs.python.org/3/library/index.html") as html:
+    read_html = html.read()
+    decoded_html = read_html.decode("utf-8")
+    # print the first 1000 characters
+    # print(decoded_html[:1000])
 
 picture = urlopen("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b9e405d8-7e26-4ce3-a7d8-dd388ca2b4dc/d5n7ux4-805504ea-a62b-4805-a8f3-43d519978ee2.png/v1/fill/w_1024,h_747,strp/png__rat_2_by_moonglowlilly_d5n7ux4-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzQ3IiwicGF0aCI6IlwvZlwvYjllNDA1ZDgtN2UyNi00Y2UzLWE3ZDgtZGQzODhjYTJiNGRjXC9kNW43dXg0LTgwNTUwNGVhLWE2MmItNDgwNS1hOGYzLTQzZDUxOTk3OGVlMi5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.AHE3DcOVDMOi5rdqYv-2HdsdVZ_L5NxDmfM_0feobC0")
 read_picture = picture.read()
