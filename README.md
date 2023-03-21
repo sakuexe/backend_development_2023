@@ -19,6 +19,7 @@ sint cillum sint consectetur cupidatat.
 
 ## Links
 
+- [Python Standard Library Docs](https://docs.python.org/3/library/)
 - [Microsoft Azure Portal](https://portal.azure.com/)
 - [WinSCP](https://winscp.net/eng/index.php)
 - [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)
