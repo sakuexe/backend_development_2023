@@ -140,3 +140,10 @@ def random_suffix(m):
 about_me = "I like to code in Java, Python and C#. And I use Visual Studio Code."
 about_me = re.sub(r"Java|Python|Visual|C#|Code", random_suffix, about_me)
 print(about_me)
+
+# Use \bWORD\b to find just the WORD, not any other words that include it
+re.findall(r"is", "Here is some text. This is also more text")  # len(this) = 3
+re.findall(r"\bis\b", "Here is some text. This is also more text")  # len(this) = 2
+
+# use re.I to ignore case
+re.findall(r"\bbomb\b", "Here is a BOMB", re.I)
