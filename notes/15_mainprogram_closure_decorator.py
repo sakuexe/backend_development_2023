@@ -92,7 +92,7 @@ def divide(a, b):
 divide(7, 2)
 divide(5, 0)
 
-# Another example of a decorator funcition
+# Another example of a decorator function
 from time import perf_counter
 
 def timeit(func):
