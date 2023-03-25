@@ -47,14 +47,20 @@ class WordWarning(HTMLParser):
         """ Find all matches for bad words in the parsed text.
             Optional parameter for adding own bad words to the list.
         """
-        if len(own_words) > 0:
-            for word in own_words:
-                own_words.append(word)
+
         # find matches for all bad words
         for word in BAD_WORDS:
             matches = re.findall(f"\\b{word}\\b", self.parsed_text, re.I)
             self._matches += len(matches)
+        if len(own_words) < 1:
+            return self._matches
+
+        # if own words are added, check them too
+        for word in own_words:
+            matches = re.findall(f"\\b{word}\\b", self.parsed_text, re.I)
+            self._matches += len(matches)
         return self._matches
+
 
 def parse_html(data):
     parser = WordWarning()
@@ -63,5 +69,5 @@ def parse_html(data):
         data = re.sub(r'<'+tag+r'.*?>(.|\n)*?</'+tag+r'>', '', data)
     parser.feed(data)
     # return the number of matches of bad words
-    return parser.find_all_matches_string()
+    return parser.find_all_matches_string(["developer", "software"])
     # return parser.parsed_text
