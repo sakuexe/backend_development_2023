@@ -1,6 +1,5 @@
 from html.parser import HTMLParser
 import re
-from typing import List
 from mypackages.mydecorators import timeit
 
 # Choose which tags to completely remove from the parsing
@@ -43,31 +42,19 @@ class WordWarning(HTMLParser):
         return filtered
 
     @timeit
-    def find_all_matches_string(self, own_words: List[str] = []) -> int:
-        """ Find all matches for bad words in the parsed text.
-            Optional parameter for adding own bad words to the list.
-        """
-
-        # find matches for all bad words
+    def find_all_matches_string(self) -> int:
+        """ Find all matches for bad words in the parsed text. """
         for word in BAD_WORDS:
-            matches = re.findall(f"\\b{word}\\b", self.parsed_text, re.I)
-            self._matches += len(matches)
-        if len(own_words) < 1:
-            return self._matches
-
-        # if own words are added, check them too
-        for word in own_words:
             matches = re.findall(f"\\b{word}\\b", self.parsed_text, re.I)
             self._matches += len(matches)
         return self._matches
 
-
-def parse_html(data):
+def parse_html(data: str) -> int:
     parser = WordWarning()
     # remove all the unwanted tags from REMOVED_TAGS
     for tag in REMOVED_TAGS:
         data = re.sub(r'<'+tag+r'.*?>(.|\n)*?</'+tag+r'>', '', data)
     parser.feed(data)
     # return the number of matches of bad words
-    return parser.find_all_matches_string(["developer", "software"])
+    return parser.find_all_matches_string()
     # return parser.parsed_text

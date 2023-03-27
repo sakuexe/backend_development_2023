@@ -23,7 +23,6 @@
 """
 from urllib import request
 from urllib.error import URLError
-from PIL import Image
 import os
 import re
 from mypackages import parsehtml
@@ -74,9 +73,8 @@ def save_to_file(path: str, data: bytes) -> None:
         with open(path+"-temp", "wb") as file:
             file.write(data)
         # change the name of the downloaded file to include the format
-        img = Image.open(path+"-temp")
-        print(img.format)
-        os.rename(f"./{path}-temp", f"{path}.{str(img.format).lower()}")
+        file_format = ""
+        os.rename(f"./{path}-temp", f"{path}.{str(file_format).lower()}")
     except OSError as error:
         print("OSError:", error)
 
