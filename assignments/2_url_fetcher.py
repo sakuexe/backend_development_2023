@@ -5,12 +5,10 @@
     - Test if byte data from URL is UTF-8 decodable.
     If not, ask for a destination and save the file normally
     - Check the URLs' text data for any of the following dangerous words:
-        * bomb
-        * kill
-        * terror
-        * terrorist
-        * terrorists
-        * terrorism
+    [
+        bomb, kill, terror,
+        terrorist, terrorists, terrorism
+    ]
     - The words above need to be separate.
     (So no matches for words like bomba, killer or antiterrorism)
     - The words need to be case insensitive
@@ -21,68 +19,43 @@
     Use the command "pip3 install -r requirements.txt"
     to install all the needed pip packages for these assignments
 """
-from urllib import request
-from urllib.error import URLError
-import os
 import re
 from mypackages import parsehtml
-from typing import Union
+from mypackages.termcolors import color_text
+from mypackages.handleurldata import get_url, validate_url, validate_response
 
-def get_url(url: str) -> bytes:
-    """Get the raw byte data of a given URL"""
-    try:
-        with request.urlopen(url) as file:
-            response = file.read()
-        return response
-    except ValueError as error:
-        print("Invalid URL:", error)
-        return bytes()
-    # if URL passes value error but is still invalid
-    except URLError as error:
-        print("Invalid URL:", error)
-        return bytes()
-    # URLError is a subclass of OSError, so catch other OSErrors
-    except OSError as error:
-        print("Unexpected OSError:", error)
-        return bytes()
+FILE_TYPE_RE = re.compile(r"\.\w+$", re.IGNORECASE)
 
-def validate_url(url: str) -> str:
-    """ Check if the URL starts with "https://" or "http://".
-        If not, lets add https:// to the start"""
-    if not re.match(r"^http(s)?://", url):
-        print("Adding https:// to the front of URL")
-        return "https://" + url
-    print("URL valid")
-    return url
 
-def validate_response(response) -> Union[str, bool]:
-    """ Validate the byte data gotten from a URL
-        If it cannot be decoded to UTF-8, return False boolean"""
-    try:
-        return response.decode("utf-8")
-    except UnicodeError as error:
-        print("Given link does not contain UTF-8 data")
-        return False
-    except ValueError as error:
-        print("Decoding link error:", error)
-        return False
+def validate_path(path, data_format=".html") -> str:
+    """ Validate the path that the user gave """
+    if len(path) < 1:
+        return ""
+    if not re.search(FILE_TYPE_RE, path):
+        path += data_format.lower()
+    return path
+
 
 def save_to_file(path: str, data: bytes) -> None:
     """Save non UTF-8 byte data into a file in the given path"""
     try:
-        with open(path+"-temp", "wb") as file:
+        with open(path, "wb") as file:
             file.write(data)
-        # change the name of the downloaded file to include the format
-        file_format = ""
-        os.rename(f"./{path}-temp", f"{path}.{str(file_format).lower()}")
     except OSError as error:
-        print("OSError:", error)
+        print(color_text("OSError occurred during saving:", "red"), error)
+        return
+    print("Succesfully downloaded:", color_text(path, "green"))
+
 
 def save_to_utf(path: str, data) -> None:
-    with open(path, "w") as file:
-        # for line in data:
-        #     file.write(line+"\n")
-        file.write(data)
+    try:
+        with open(path, "w") as file:
+            file.write(data)
+    except OSError as error:
+        print(color_text("OSError occurred during saving:", "red"), error)
+        return
+    print("Succesfully downloaded", color_text(path, "green"))
+
 
 def main() -> None:
     # Get the URL
@@ -95,19 +68,31 @@ def main() -> None:
         return
 
     decoded_data = validate_response(fetch_data)
+
+    # if the data was HTML code
     if decoded_data:
         # parse HTML to text
-        # Generator vs All at once?
         print("valid UTF-8")
         # count the bad words on the site
         bad_words_count = parsehtml.parse_html(decoded_data)
         print("Number of bad words found:", bad_words_count)
-        save_to_utf("testinggggg.txt", decoded_data)
+        path: str = input("Select a valid path and name to save file to: ")
+        validate_path(path)
+        save_to_utf(path, decoded_data)
+
     else:
+        # if the url was non-HTML byte data
         print("not valid UTF-8")
+        # get the filetype at the end of the url
+        data_format: str = re.search(FILE_TYPE_RE, url).group()
         # select path to save file to
-        path = input("Select a valid path for the file to be saved at: ")
+        path = input(
+            "Select a valid path and name for the file to be saved at: ")
+        if not validate_path(path, data_format):
+            print("No valid path given, quitting program")
+            return
         save_to_file(path, fetch_data)
+
 
 if __name__ == "__main__":
     main()
