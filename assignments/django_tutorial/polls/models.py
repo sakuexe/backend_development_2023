@@ -6,18 +6,20 @@ from django.utils import timezone
 
 # Create your models here.
 
-# creating a new table for questions
+
 class Question(models.Model):
-    """ the columns for the table,
+    """ Creates a questions table for the database.
         Django automatically creates IDs
     """
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     # Python's ToString() method
+
     def __str__(self):
         return self.question_text
     # class method for checking if the question was published within the last
     # 24 hours
+
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
@@ -29,5 +31,6 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+
     def __str__(self):
         return self.choice_text
