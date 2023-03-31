@@ -88,10 +88,11 @@ def main() -> None:
         # select path to save file to
         path = input(
             "Select a valid path and name for the file to be saved at: ")
-        if not validate_path(path, data_format):
+        validated_path = validate_path(path, data_format)
+        if not validated_path:
             print("No valid path given, quitting program")
             return
-        save_to_file(path, fetch_data)
+        save_to_file(validated_path, fetch_data)
 
 
 if __name__ == "__main__":
