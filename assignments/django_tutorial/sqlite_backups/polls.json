@@ -1,0 +1,160 @@
+[
+{
+    "model": "polls.question",
+    "pk": 1,
+    "fields": {
+        "question_text": "What's up?",
+        "pub_date": "2023-03-28T06:27:04.780Z"
+    }
+},
+{
+    "model": "polls.question",
+    "pk": 2,
+    "fields": {
+        "question_text": "What is the name of the cat from Persona 5?",
+        "pub_date": "2023-03-28T07:02:21Z"
+    }
+},
+{
+    "model": "polls.question",
+    "pk": 3,
+    "fields": {
+        "question_text": "What is the best animal?",
+        "pub_date": "2023-03-28T07:22:41Z"
+    }
+},
+{
+    "model": "polls.question",
+    "pk": 4,
+    "fields": {
+        "question_text": "Do you like rain?",
+        "pub_date": "2023-03-31T07:13:34Z"
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 1,
+    "fields": {
+        "question": 1,
+        "choice_text": "Not much",
+        "votes": 1
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 2,
+    "fields": {
+        "question": 1,
+        "choice_text": "The sky",
+        "votes": 3
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 4,
+    "fields": {
+        "question": 2,
+        "choice_text": "Morgana",
+        "votes": 2
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 5,
+    "fields": {
+        "question": 2,
+        "choice_text": "Mariachi",
+        "votes": 1
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 6,
+    "fields": {
+        "question": 2,
+        "choice_text": "Teddy",
+        "votes": 0
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 7,
+    "fields": {
+        "question": 2,
+        "choice_text": "Punchy",
+        "votes": 1
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 8,
+    "fields": {
+        "question": 3,
+        "choice_text": "Raccoon",
+        "votes": 2
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 9,
+    "fields": {
+        "question": 3,
+        "choice_text": "Fox",
+        "votes": 2
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 10,
+    "fields": {
+        "question": 3,
+        "choice_text": "Dog",
+        "votes": 0
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 11,
+    "fields": {
+        "question": 3,
+        "choice_text": "Cat",
+        "votes": 1
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 12,
+    "fields": {
+        "question": 4,
+        "choice_text": "Nope",
+        "votes": 0
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 13,
+    "fields": {
+        "question": 4,
+        "choice_text": "Yes",
+        "votes": 0
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 14,
+    "fields": {
+        "question": 4,
+        "choice_text": "Sometimes",
+        "votes": 0
+    }
+},
+{
+    "model": "polls.choice",
+    "pk": 15,
+    "fields": {
+        "question": 4,
+        "choice_text": "It's the best",
+        "votes": 0
+    }
+}
+]
