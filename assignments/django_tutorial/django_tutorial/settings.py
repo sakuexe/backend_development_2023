@@ -55,7 +55,12 @@ ROOT_URLCONF = 'django_tutorial.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # add base directory to templates
+        'DIRS': [BASE_DIR / 'templates'],
+        # after adding the line above:
+        # get base_site.html and copy it to the root/templates/admin directory
+        # find the django install location with the following code:
+        # $ python3 -c "import django; print(django.__path__)"
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
